@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "office-tongue",
-    "slug": "office-tongue",
+    "name": "persona",
+    "slug": "persona",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "officetongue",
+    "scheme": "persona",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

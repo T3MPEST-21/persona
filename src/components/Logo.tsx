@@ -1,5 +1,4 @@
-import React from 'react';
-import Svg, { Path, Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
+import Svg, { Path, Circle, Defs, LinearGradient, Stop, RadialGradient } from 'react-native-svg';
 import { View, StyleSheet, Text } from 'react-native';
 import { COLORS } from '../theme';
 
@@ -17,17 +16,25 @@ export const Logo: React.FC<LogoProps> = ({ size = 32, showText = false }) => {
             <Stop offset="0" stopColor={COLORS.accent} />
             <Stop offset="1" stopColor="#A855F7" /> 
           </LinearGradient>
+          <RadialGradient id="glow" cx="16" cy="16" r="10" gradientUnits="userSpaceOnUse">
+            <Stop offset="0" stopColor="white" stopOpacity="0.8" />
+            <Stop offset="1" stopColor="white" stopOpacity="0" />
+          </RadialGradient>
         </Defs>
         {/* Two overlapping persona bubbles */}
-        <Circle cx="12" cy="16" r="10" fill="url(#grad)" fillOpacity="0.8" />
-        <Circle cx="20" cy="16" r="10" fill={COLORS.textMuted} fillOpacity="0.3" stroke={COLORS.accent} strokeWidth="1" />
+        <Circle cx="12" cy="16" r="8" fill={COLORS.accent} fillOpacity="0.6" />
+        <Circle cx="20" cy="16" r="8" fill="#A855F7" fillOpacity="0.6" />
+        
+        {/* Central Glow */}
+        <Circle cx="16" cy="16" r="10" fill="url(#glow)" />
         
         {/* Subtle smile/link between personae */}
         <Path 
-          d="M12 20C12 20 14.5 22 16 22C17.5 22 20 20 20 20" 
-          stroke={COLORS.text} 
-          strokeWidth="2" 
+          d="M13 19C13 19 14.5 21 16 21C17.5 21 19 19 19 19" 
+          stroke="white" 
+          strokeWidth="1.5" 
           strokeLinecap="round" 
+          opacity="0.8"
         />
       </Svg>
       {showText && (

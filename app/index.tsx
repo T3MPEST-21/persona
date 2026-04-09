@@ -14,6 +14,7 @@ import { translateText } from '../src/api/aiService';
 import { COLORS, SPACING } from '../src/theme';
 import { EnrichedTranslationResult } from '../src/types';
 import * as Haptics from 'expo-haptics';
+import { Trash2 } from 'lucide-react-native';
 
 export default function Index() {
   const scrollRef = useRef<ScrollView>(null);
@@ -43,7 +44,8 @@ export default function Index() {
     addToHistory,
     isTranslating,
     lastResult,
-    history
+    history,
+    clearHistory
   } = usePersonaStore();
 
   const handleTranslate = async () => {
@@ -124,7 +126,18 @@ export default function Index() {
             onShare={() => setIsShareVisible(true)}
           />
 
+          <View style={styles.footerContainer}>
+            <TouchableOpacity onPress={clearHistory} style={styles.clearButton}>
+              <Trash2 size={14} color={COLORS.textMuted} />
+              <Text style={styles.clearText}>Clear History</Text>
+            </TouchableOpacity>
+            <Text style={styles.versionText}>Persona v1.0.0</Text>
+            <Text style={styles.versionText}>[T3MPEST]</Text>
+          </View>
+
           <View style={styles.spacer} />
+
+          
         </ScrollView>
 
         {lastResult && (
@@ -184,6 +197,33 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   spacer: {
-    height: 100,
-  }
+    height: 60,
+  },
+  footerContainer: {
+    marginTop: SPACING.xl,
+    alignItems: 'center',
+    gap: SPACING.md,
+    opacity: 0.6,
+  },
+  clearButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  },
+  clearText: {
+    color: COLORS.textMuted,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  versionText: {
+    color: COLORS.textMuted,
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+  },
 });
